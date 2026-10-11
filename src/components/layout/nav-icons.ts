@@ -1,0 +1,35 @@
+import {
+  BarChart3,
+  CreditCard,
+  DollarSign,
+  HandCoins,
+  LayoutDashboard,
+  Package,
+  Settings,
+  Shirt,
+  ShoppingBag,
+  ShoppingCart,
+  Store,
+  Truck,
+  Users,
+  UsersRound,
+  type LucideIcon,
+} from "lucide-react";
+import type { IconKey } from "./nav";
+
+export const NAV_ICONS: Record<IconKey, LucideIcon> = {
+  dashboard: LayoutDashboard,
+  pos: ShoppingCart,
+  products: Shirt,
+  inventory: Package,
+  sales: ShoppingBag,
+  customers: Users,
+  suppliers: Truck,
+  purchasing: HandCoins,
+  expenses: DollarSign,
+  employees: UsersRound,
+  branches: Store,
+  reports: BarChart3,
+  subscription: CreditCard,
+  settings: Settings,
+};

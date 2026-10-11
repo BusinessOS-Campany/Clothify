@@ -1,0 +1,319 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ------------------------------------------------------------------ *
+ * CLOTHIFY Design Tokens
+ * Palette: warm neutral surfaces / violet default accent / premium SaaS
+ * ------------------------------------------------------------------ */
+
+:root {
+  --radius: 0.625rem;
+
+  --background: #f7f6f4;
+  --foreground: #18171d;
+
+  --card: #ffffff;
+  --card-foreground: #18171d;
+
+  --popover: #ffffff;
+  --popover-foreground: #18171d;
+
+  /* violet (default) */
+  --primary: #6d28d9;
+  --primary-foreground: #ffffff;
+
+  --secondary: #eeebe9;
+  --secondary-foreground: #2b2733;
+
+  --muted: #f0eeeb;
+  --muted-foreground: #6f6a78;
+
+  --accent: #f1ecfb;
+  --accent-foreground: #5b21b6;
+
+  --destructive: #c0392b;
+  --destructive-foreground: #ffffff;
+
+  --border: #e4e1de;
+  --input: #dcd8d4;
+  --ring: #6d28d9;
+
+  --chart-1: #6d28d9;
+  --chart-2: #2563eb;
+  --chart-3: #0ea371;
+  --chart-4: #d97706;
+  --chart-5: #e11d48;
+
+  --sidebar: #fbfaf9;
+  --sidebar-foreground: #26232b;
+  --sidebar-primary: #6d28d9;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #eee9f8;
+  --sidebar-accent-foreground: #3b2a6b;
+  --sidebar-border: #e9e6e2;
+  --sidebar-ring: #6d28d9;
+
+  --success: #14915f;
+  --warning: #b7791f;
+  --info: #3f6fb5;
+}
+
+.dark {
+  --background: #0f0e13;
+  --foreground: #e9e7ee;
+
+  --card: #17151d;
+  --card-foreground: #e9e7ee;
+
+  --popover: #1a1821;
+  --popover-foreground: #e9e7ee;
+
+  --primary: #a78bfa;
+  --primary-foreground: #2a1048;
+
+  --secondary: #22202a;
+  --secondary-foreground: #e4e0ec;
+
+  --muted: #1d1b24;
+  --muted-foreground: #9a95a8;
+
+  --accent: #2b1f47;
+  --accent-foreground: #c4b5fd;
+
+  --destructive: #f05252;
+  --destructive-foreground: #ffffff;
+
+  --border: #27242e;
+  --input: #2e2b36;
+  --ring: #a78bfa;
+
+  --sidebar: #131118;
+  --sidebar-foreground: #cfcbd9;
+  --sidebar-primary: #a78bfa;
+  --sidebar-primary-foreground: #2a1048;
+  --sidebar-accent: #221b33;
+  --sidebar-accent-foreground: #ddd3ff;
+  --sidebar-border: #27242e;
+  --sidebar-ring: #a78bfa;
+
+  --success: #2ecc8f;
+  --warning: #e2a33e;
+  --info: #6d94d6;
+}
+
+/* Accent presets (data-accent on <html>) — light */
+html[data-accent="violet"] {
+  --primary: #6d28d9;
+  --ring: #6d28d9;
+  --sidebar-primary: #6d28d9;
+  --accent: #f1ecfb;
+  --accent-foreground: #5b21b6;
+}
+html[data-accent="blue"] {
+  --primary: #2563eb;
+  --ring: #2563eb;
+  --sidebar-primary: #2563eb;
+  --accent: #eaf0fe;
+  --accent-foreground: #1d4ed8;
+}
+html[data-accent="emerald"] {
+  --primary: #0f9d6b;
+  --ring: #0f9d6b;
+  --sidebar-primary: #0f9d6b;
+  --accent: #e3f3ec;
+  --accent-foreground: #047857;
+}
+html[data-accent="rose"] {
+  --primary: #e11d48;
+  --ring: #e11d48;
+  --sidebar-primary: #e11d48;
+  --accent: #fde8ee;
+  --accent-foreground: #be123c;
+}
+html[data-accent="amber"] {
+  --primary: #b45309;
+  --ring: #b45309;
+  --sidebar-primary: #b45309;
+  --accent: #fdf1e3;
+  --accent-foreground: #92400e;
+}
+html[data-accent="teal"] {
+  --primary: #0d9488;
+  --ring: #0d9488;
+  --sidebar-primary: #0d9488;
+  --accent: #e2f4f2;
+  --accent-foreground: #0f766e;
+}
+
+/* Accent presets — dark */
+.dark[data-accent="violet"],
+html[data-accent="violet"].dark {
+  --primary: #a78bfa;
+  --primary-foreground: #2a1048;
+  --ring: #a78bfa;
+  --sidebar-primary: #a78bfa;
+  --accent: #2b1f47;
+  --accent-foreground: #c4b5fd;
+}
+.dark[data-accent="blue"],
+html[data-accent="blue"].dark {
+  --primary: #6d9df8;
+  --primary-foreground: #0a1c46;
+  --ring: #6d9df8;
+  --sidebar-primary: #6d9df8;
+  --accent: #142a55;
+  --accent-foreground: #a5c4ff;
+}
+.dark[data-accent="emerald"],
+html[data-accent="emerald"].dark {
+  --primary: #2ecc8f;
+  --primary-foreground: #04241a;
+  --ring: #2ecc8f;
+  --sidebar-primary: #2ecc8f;
+  --accent: #12302a;
+  --accent-foreground: #7fe7c4;
+}
+.dark[data-accent="rose"],
+html[data-accent="rose"].dark {
+  --primary: #fb7185;
+  --primary-foreground: #4c0519;
+  --ring: #fb7185;
+  --sidebar-primary: #fb7185;
+  --accent: #3a1220;
+  --accent-foreground: #fda4af;
+}
+.dark[data-accent="amber"],
+html[data-accent="amber"].dark {
+  --primary: #f2a33c;
+  --primary-foreground: #3b2204;
+  --ring: #f2a33c;
+  --sidebar-primary: #f2a33c;
+  --accent: #3a2a10;
+  --accent-foreground: #fcd34d;
+}
+.dark[data-accent="teal"],
+html[data-accent="teal"].dark {
+  --primary: #2dd4bf;
+  --primary-foreground: #042f2c;
+  --ring: #2dd4bf;
+  --sidebar-primary: #2dd4bf;
+  --accent: #11312f;
+  --accent-foreground: #5eead4;
+}
+
+/* Density (data-density on <html>): scales the whole spacing scale */
+@theme inline {
+  --spacing: 0.25rem;
+}
+html[data-density="compact"] {
+  --spacing: 0.21875rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --font-sans: var(--font-sans-family), ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: var(--font-arabic-family), var(--font-sans-family),
+    ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-family), ui-monospace, "SF Mono", monospace;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  [dir="rtl"] body,
+  html[dir="rtl"] {
+    font-family: var(--font-arabic);
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+}
+
+/* Respect OS reduced motion unless the user explicitly opts into animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* Receipt printing: only the receipt node is rendered on paper */
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+  #pos-receipt,
+  #pos-receipt * {
+    visibility: visible !important;
+  }
+  #pos-receipt {
+    position: absolute;
+    inset-inline-start: 0;
+    top: 0;
+    width: 80mm;
+    padding: 4mm;
+    font-size: 12px;
+    color: #000 !important;
+  }
+}
