@@ -1,0 +1,11 @@
+{
+  "slug": "clothing",
+  "name": "Clothing Store System",
+  "nameAr": "نظام متجر الملابس",
+  "description": "Products, sizes, colors and sales for clothing stores.",
+  "descriptionAr": "إدارة المنتجات والمقاسات والألوان والمبيعات لمحل الملابس.",
+  "icon": "shirt",
+  "category": "retail",
+  "version": "1.0.0",
+  "discoverable": true
+}
