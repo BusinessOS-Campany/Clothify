@@ -5,9 +5,11 @@ import { hashPassword } from "better-auth/crypto";
 import {
   PERMISSION_CATALOG,
   ROLE_CODES,
+  ROLE_NAMES,
   ROLE_PERMISSIONS,
   type RoleCode,
 } from "../src/core/rbac/catalog";
+import { SUBSCRIPTION_PLANS } from "../src/core/plans";
 import { computeTotals } from "../src/lib/pricing";
 import { adjustStock } from "../src/lib/inventory";
 
@@ -28,15 +30,6 @@ function randInt(min: number, max: number): number {
 function r2(n: number): number {
   return Math.round((n + Number.EPSILON) * 100) / 100;
 }
-
-const ROLE_NAMES: Record<RoleCode, { ar: string; en: string }> = {
-  platform_admin: { ar: "مسؤول المنصة", en: "Platform Administrator" },
-  owner: { ar: "مالك المتجر", en: "Store Owner" },
-  manager: { ar: "مدير المتجر", en: "Store Manager" },
-  inventory_manager: { ar: "مدير المخزون", en: "Inventory Manager" },
-  cashier: { ar: "أمين صندوق", en: "Cashier" },
-  sales_employee: { ar: "موظف مبيعات", en: "Sales Employee" },
-};
 
 const STORE_CONFIG = {
   taxEnabled: true,
@@ -130,13 +123,6 @@ const CUSTOMERS = [
   { name: "Tariq Mahmoud", nameAr: "طارق محمود", phone: "+1-555-0108", segment: "Regular" },
   { name: "Rania Fares", nameAr: "رانيا فارس", phone: "+1-555-0109", segment: "New" },
   { name: "Bilal Zaid", nameAr: "بلال زيد", phone: "+1-555-0110", segment: "Regular" },
-];
-
-const PLANS = [
-  { code: "TRIAL" as const, nameAr: "تجربة مجانية", nameEn: "Free Trial", priceMonthly: 0, staffLimit: 3, branchLimit: 1, productLimit: 100, sortOrder: 0, descriptionAr: "استكشف كل الميزات لمدة 14 يوماً", descriptionEn: "Explore all features for 14 days" },
-  { code: "STARTER" as const, nameAr: "المبتدئ", nameEn: "Starter", priceMonthly: 19, staffLimit: 5, branchLimit: 2, productLimit: 500, sortOrder: 1, descriptionAr: "للمتاجر الصغيرة", descriptionEn: "For small stores" },
-  { code: "PROFESSIONAL" as const, nameAr: "الاحترافي", nameEn: "Professional", priceMonthly: 49, staffLimit: 25, branchLimit: 10, productLimit: 5000, sortOrder: 2, descriptionAr: "للمتاجر المتنامية متعددة الفروع", descriptionEn: "For growing multi-branch retailers" },
-  { code: "ENTERPRISE" as const, nameAr: "المؤسسات", nameEn: "Enterprise", priceMonthly: 149, staffLimit: 1000, branchLimit: 1000, productLimit: 1000000, sortOrder: 3, descriptionAr: "بلا حدود لكل الفروع", descriptionEn: "Unlimited branches & scale" },
 ];
 
 async function getOrCreateUser(input: {
@@ -271,7 +257,7 @@ async function seed() {
 
   console.log("→ Seeding subscription plans…");
   const planIds = new Map<string, string>();
-  for (const plan of PLANS) {
+  for (const plan of SUBSCRIPTION_PLANS) {
     const row = await prisma.subscriptionPlan.upsert({
       where: { code: plan.code },
       create: {

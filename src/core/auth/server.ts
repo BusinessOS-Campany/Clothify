@@ -2,12 +2,35 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { username } from "better-auth/plugins";
 import { prisma } from "@/lib/db";
+import {
+  SESSION_COOKIE,
+  authSecret,
+  systemBasePath,
+} from "./session-config";
 
 export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL,
-  secret: process.env.BETTER_AUTH_SECRET,
+  secret: authSecret(),
   database: prismaAdapter(prisma, { provider: "postgresql" }),
   plugins: [username()],
+  advanced: {
+    /**
+     * Platform-hosted clones terminate TLS at the platform proxy, so the app
+     * itself serves plain HTTP; a `__Secure-` prefix would make the browser drop
+     * the cookie. `false` here also covers the HTTP demo.
+     */
+    useSecureCookies: false,
+    cookies: {
+      session_token: {
+        /**
+         * The dot-less name and per-mount path let the platform relay this
+         * cookie back to the browser and recognise it as the system's session.
+         */
+        name: SESSION_COOKIE,
+        attributes: { path: systemBasePath() },
+      },
+    },
+  },
   emailAndPassword: {
     enabled: true,
     autoSignIn: true,

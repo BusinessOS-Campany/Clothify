@@ -1,7 +1,7 @@
 /**
  * Central RBAC catalogue: permissions and role → permission mapping.
  * Enforcement happens server-side (see core/rbac/index.ts).
- * Seed data mirrors this catalogue (prisma/seed.ts).
+ * `prisma/seed.ts` and `prisma/bootstrap.ts` both expand this catalogue.
  */
 
 export const MODULES = [
@@ -131,6 +131,16 @@ export const ROLE_CODES = [
 ] as const;
 
 export type RoleCode = (typeof ROLE_CODES)[number];
+
+/** Bilingual display names for each role, shared by the seed and the bootstrap. */
+export const ROLE_NAMES: Record<RoleCode, { ar: string; en: string }> = {
+  platform_admin: { ar: "مسؤول المنصة", en: "Platform Administrator" },
+  owner: { ar: "مالك المتجر", en: "Store Owner" },
+  manager: { ar: "مدير المتجر", en: "Store Manager" },
+  inventory_manager: { ar: "مدير المخزون", en: "Inventory Manager" },
+  cashier: { ar: "أمين صندوق", en: "Cashier" },
+  sales_employee: { ar: "موظف مبيعات", en: "Sales Employee" },
+};
 
 const ALL = PERMISSION_CATALOG.map((p) => p.code as PermissionCode);
 
